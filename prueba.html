@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <input type="text" id="entrada" />
+    <button id="aceptar">Aceptar</button>
+    <label id="contador"></label>
+  </body>
+  <script>
+
+    /*
+        Validación y contador del número de caracteres ingresados
+    */
+    document
+      .getElementById("aceptar")
+      .addEventListener("click", function (event) {
+        let item = document.getElementById("entrada");
+        let str = item.value;
+        if (!(str.length > 13 && str.length <= 16)) {
+          console.log("Tamaño de la cadena inválido");
+          alert("Tamaño de la cadena inválido");
+          return;
+        }
+        str = str.split("");
+        var array_count = {};
+        str.forEach((element) => {
+            if(!array_count[element]){
+                array_count[element] = 0;
+            }
+            array_count[element] += 1;
+            }
+        );
+        console.table(array_count);
+
+        let lb_count = document.getElementById("contador");
+
+        let array_sort = [];
+        lb_count.innerHTML = "";
+
+        Object.keys(array_count).forEach((item)=>{
+            array_sort = array_sort.concat([{key:item, value: array_count[item]}]);
+        });
+
+        array_sort.sort(function(a,b){
+            return b.value - a.value;
+        });
+
+        lb_count.innerHTML = `El caracter ${array_sort[0].key} se repitio ${array_sort[0].value} veces`;
+      });
+  </script>
+  <!-- scabral@palo-it.com -->
+</html>
